@@ -272,21 +272,23 @@ export default function Home() {
             </div>
           </div>
         )}
-            {showAllFavorites && (
-      <div className="max-w-4xl w-full space-y-8 p-8 bg-gray-100 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4">All Favorites</h2>
-        <div className="flex flex-wrap justify-center rounded-lg overflow-hidden">
-          {favorites.map((favorite) => (
-            <div key={favorite.gifId} className="w-1/3 p-2 rounded-lg">
-              <img src={favorite.url} alt={favorite.title} />
-              <button onClick={() => toggleFavorite(favorite)}>
-                Remove from Favorites
-              </button>
+           {showFavorites && (
+          <div className="max-w-4xl w-full space-y-8 p-8 bg-gray-100 rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold mb-4">Your Favorites</h2>
+            <div className="flex flex-wrap justify-center rounded-lg overflow-hidden">
+              {gifs
+                .filter((gif) => favorites.includes(gif.id))
+                .map((gif) => (
+                  <div key={gif.id} className="w-1/3 p-2 rounded-lg">
+                    <img src={gif.url} alt={gif.title} />
+                    <button onClick={() => toggleFavorite(gif)}>
+                      Remove from Favorites
+                    </button>
+                  </div>
+                ))}
             </div>
-          ))}
-        </div>
-      </div>
-    )}
+          </div>
+        )}
 
 
       </div>
